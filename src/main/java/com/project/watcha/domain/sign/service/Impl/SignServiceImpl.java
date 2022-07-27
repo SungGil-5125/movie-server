@@ -39,7 +39,7 @@ public class SignServiceImpl implements SignService {
          User user = userRepository.findByEmail(signInDto.getEmail())
                  .orElseThrow(() -> new UserNotFoundException("사용자를 찾을 수 없습니다.", USER_NOT_FOUND));
 
-         if(passwordEncoder.matches(signInDto.getPassword(), user.getPassword())) {
+         if(!passwordEncoder.matches(signInDto.getPassword(), user.getPassword())) {
              throw new PasswordNotCorrectException(PASSWORD_NOT_CORRECT);
          }
 
