@@ -1,6 +1,8 @@
 package com.project.watcha.domain.sign.controller;
 
+import com.project.watcha.domain.sign.dto.request.SignInDto;
 import com.project.watcha.domain.sign.dto.request.SignUpDto;
+import com.project.watcha.domain.sign.dto.response.SignInResponseDto;
 import com.project.watcha.domain.sign.service.SignService;
 import com.project.watcha.global.response.ResponseService;
 import com.project.watcha.global.response.result.CommonResultResponse;
@@ -24,5 +26,9 @@ public class SignController {
         return responseService.getSuccessResult();
     }
 
-
+    @PostMapping("/signin")
+    public CommonResultResponse signin(@Valid @RequestBody SignInDto signInDto) {
+        SignInResponseDto data = signService.login(signInDto);
+        return responseService.getSingleResult(data);
+    }
 }
