@@ -11,6 +11,7 @@ import com.project.watcha.global.exception.exceptions.UsedEmailException;
 import com.project.watcha.global.exception.exceptions.UserNotFoundException;
 import com.project.watcha.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import static com.project.watcha.global.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SignServiceImpl implements SignService {
 
     private final UserRepository userRepository;
@@ -28,6 +30,7 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public Long register(SignUpDto signUpDto) {
+        log.info("asdfafd");
         Optional<User> findByEmail = userRepository.findByEmail(signUpDto.getEmail());
         if(findByEmail.isPresent()){
             throw new UsedEmailException("이미 사용 중인 이메일 입니다.", USED_EMAIL);
@@ -45,8 +48,9 @@ public class SignServiceImpl implements SignService {
              throw new PasswordNotCorrectException(PASSWORD_NOT_CORRECT);
         }
 
-        String accessToken = jwtTokenProvider.generateAccessToken(user.getEmail());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getEmail());
+        final String accessToken = jwtTokenProvider.generateAccessToken(user.getEmail());
+        final String refreshToken = jwtTokenProvider.generateRefreshToken(user.getEmail());
+
         user.updateRefreshToken(refreshToken);
 
         return SignInResponseDto.builder()

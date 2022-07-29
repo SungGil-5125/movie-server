@@ -11,14 +11,14 @@ import javax.validation.constraints.Size;
 @Getter
 public class SignUpDto {
 
-    @Size(min = 2, max = 5)
+//    @Size(min = 2, max = 5)
     private String userName;
 
-    @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?")
+//    @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?")
     private String email;
 
-    @Pattern(regexp = "^[\\w!@#$%^&*]{2,}&")
-    @Size(min = 10)
+//    @Pattern(regexp = "^[\\w!@#$%^&*]{2,}&")
+//    @Size(min = 10)
     private String password;
 
     public User toEntity(String password) {

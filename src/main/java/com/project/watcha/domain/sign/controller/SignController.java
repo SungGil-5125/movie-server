@@ -7,21 +7,22 @@ import com.project.watcha.domain.sign.service.SignService;
 import com.project.watcha.global.response.ResponseService;
 import com.project.watcha.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class SignController {
 
     private final SignService signService;
     private final ResponseService responseService;
 
     @PostMapping("/signup")
-    public CommonResultResponse signup(@Valid @RequestBody SignUpDto signUpDto) {
+    public CommonResultResponse signup(@RequestBody SignUpDto signUpDto) {
+        log.info("asdfsafasf");
         signService.register(signUpDto);
         return responseService.getSuccessResult();
     }
@@ -30,5 +31,10 @@ public class SignController {
     public CommonResultResponse signin(@Valid @RequestBody SignInDto signInDto) {
         SignInResponseDto data = signService.login(signInDto);
         return responseService.getSingleResult(data);
+    }
+
+    @GetMapping("/test")
+    public String a() {
+        return "test";
     }
 }
