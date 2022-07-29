@@ -12,4 +12,9 @@ public class ErrorResponse {
         this.status = status;
         this.message = message;
     }
+
+    public ErrorResponse(String message, int status) {
+        this.message = message;
+        this.status = status;
+    }
 }
