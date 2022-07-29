@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(POST, "/user/register").permitAll()
+                .antMatchers(POST, "/signup").permitAll()
                 .antMatchers(POST, "/signin").permitAll()
                 .anyRequest().authenticated()
                 .and()
