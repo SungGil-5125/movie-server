@@ -15,6 +15,7 @@ public enum ErrorCode {
     /* TOKEN */
     INVALID_TOKEN(403, "유효 하지 않은 Token 입니다."),
     TOKEN_EXPIRATION(403, "만료된 Token 입니다."),
+    REFRESH_TOKEN_EXPIRATION(403, "만료 된 refreshToken 입니다.")
     ;
 
     private int status;

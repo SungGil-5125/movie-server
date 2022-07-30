@@ -3,6 +3,7 @@ package com.project.watcha.global.exception.handler;
 import com.project.watcha.global.exception.ErrorCode;
 import com.project.watcha.global.exception.ErrorResponse;
 import com.project.watcha.global.exception.exceptions.PasswordNotCorrectException;
+import com.project.watcha.global.exception.exceptions.RefreshTokenExpirationException;
 import com.project.watcha.global.exception.exceptions.UsedEmailException;
 import com.project.watcha.global.exception.exceptions.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
+    @ExceptionHandler(RefreshTokenExpirationException.class)
+    public ResponseEntity<ErrorResponse> refreshTokenIsExpiredException(HttpServletRequest request, RefreshTokenExpirationException e) {
+        printException(request, e.getErrorCode());
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> processValidationException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
@@ -60,6 +68,6 @@ public class GlobalExceptionHandler {
     }
 
     public void printException(HttpServletRequest request, ErrorCode errorCode) {
-        log.error("[ " + request.getRequestURI() + " 에서 { " + errorCode + " } 발생 ]");
+        log.error(request.getRequestURI() + " 에서 { " + errorCode + " } 발생");
     }
 }
