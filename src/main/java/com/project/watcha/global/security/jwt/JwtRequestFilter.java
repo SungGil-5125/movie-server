@@ -37,6 +37,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             String userEmail = accessTokenExractEmail(accessToken);
             if (userEmail != null) registerUserInfoSecurityContext(userEmail, request);
         }
+
+        filterChain.doFilter(request, response);
     }
 
     public String accessTokenExractEmail(String accessToken) {
