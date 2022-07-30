@@ -25,7 +25,11 @@ class SignServiceImplTest {
     void register() {
 
         // given
-        SignUpDto signUpDto = new SignUpDto("김성길", "s21023@gsm.hs.kr", "kimsunggil2005!");
+        SignUpDto signUpDto = SignUpDto.builder()
+                .userName("김성길")
+                .email("sunggil0125@naver.com")
+                .password("1234")
+                .build();
 
         // when
         Long register = signService.register(signUpDto);
@@ -39,7 +43,10 @@ class SignServiceImplTest {
     void login() {
 
         // given
-        SignInDto signInDto = new SignInDto("김성길", "s21023@gsm.hs.kr", "kimsunggil2005!");
+        SignInDto signInDto = SignInDto.builder()
+                .email("sunggil0125@naver.com")
+                .password("1234")
+                .build();
 
         // when
         SignInResponseDto login = signService.login(signInDto);
