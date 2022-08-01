@@ -26,13 +26,13 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     public Map<String, String> refreshToken(String refreshToken, RefreshTokenDto refreshTokenDto) {
 
+        String email = refreshTokenDto.getEmail();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("계정을 찾을 수 없습니다.", USER_NOT_FOUND));
+
         Map<String, String> token = new HashMap<>();
 
-        if(!jwtTokenProvider.isExpired(refreshToken)) {
-
-            String email = refreshTokenDto.getEmail();
-            User user = userRepository.findByEmail(email)
-                    .orElseThrow(() -> new UserNotFoundException("계정을 찾을 수 없습니다.", USER_NOT_FOUND));
+        if(!jwtTokenProvider.isExpired(refreshToken) && user.getRefreshToken() == refreshToken) {
 
             if (user.getRefreshToken() == null) {
                 throw new InvalidTokenException(INVALID_TOKEN);
