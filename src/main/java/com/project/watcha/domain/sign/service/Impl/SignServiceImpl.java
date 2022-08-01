@@ -30,7 +30,6 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public Long register(SignUpDto signUpDto) {
-        log.info("asdfafd");
         Optional<User> findByEmail = userRepository.findByEmail(signUpDto.getEmail());
         if(findByEmail.isPresent()){
             throw new UsedEmailException("이미 사용 중인 이메일 입니다.", USED_EMAIL);

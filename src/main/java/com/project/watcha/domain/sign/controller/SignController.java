@@ -22,7 +22,6 @@ public class SignController {
 
     @PostMapping("/signup")
     public CommonResultResponse signup(@Valid @RequestBody SignUpDto signUpDto) {
-        log.info("asdfsafasf");
         signService.register(signUpDto);
         return responseService.getSuccessResult();
     }
