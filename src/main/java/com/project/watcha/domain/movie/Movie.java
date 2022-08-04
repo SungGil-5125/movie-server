@@ -1,6 +1,5 @@
 package com.project.watcha.domain.movie;
 
-import com.project.watcha.domain.movie.enumType.Gender;
 import com.project.watcha.domain.movie.enumType.Genre;
 import lombok.*;
 
@@ -42,6 +41,9 @@ public class Movie {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "genre", joinColumns = @JoinColumn(name = "movie_id"))
     private List<Genre> genre = new ArrayList<>();
+
+    @Column
+    private int spectator; // 관람가 등급
 
     @Column
     private String url;
