@@ -24,7 +24,6 @@ public class UploadMovieDto {
     private String title;
     private String content;
     private int year;
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     private Genre genre;
 
     public Movie toEntity(Director director, Actor actor, String url) {

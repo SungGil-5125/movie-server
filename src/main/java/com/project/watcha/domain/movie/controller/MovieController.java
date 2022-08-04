@@ -17,7 +17,7 @@ public class MovieController {
 
     @PostMapping("/upload/movie")
     public CommonResultResponse uploadMovie(
-            @RequestParam(value = "movieDto") UploadMovieDto uploadMovieDto,
+            @RequestPart(value = "movieDto") UploadMovieDto uploadMovieDto,
             @RequestParam(value = "file", required = false) MultipartFile file) {
         movieService.uploadMovie(uploadMovieDto, file);
         return responseService.getSuccessResult();
