@@ -1,8 +1,30 @@
 package com.project.watcha.domain.movie.enumType;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
+
+import java.util.stream.Stream;
 
 @Getter
 public enum Genre {
-    SF, ACTION, COMEDY, ROMANCE, FANTASY, HORROR;
+    SF("sf"),
+    ACTION("action"),
+    COMEDY("comedy"),
+    ROMANCE("romance"),
+    FANTASY("fantasy"),
+    HORROR("horror");
+
+    private final String code;
+
+    Genre(String code) {
+        this.code = code;
+    }
+
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static Genre findByCode(String code) {
+        return Stream.of(Genre.values())
+                .filter(c -> c.code.equals(code))
+                .findFirst()
+                .orElse(null);
+    }
 }
