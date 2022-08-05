@@ -2,10 +2,7 @@ package com.project.watcha.global.exception.handler;
 
 import com.project.watcha.global.exception.ErrorCode;
 import com.project.watcha.global.exception.ErrorResponse;
-import com.project.watcha.global.exception.exceptions.PasswordNotCorrectException;
-import com.project.watcha.global.exception.exceptions.RefreshTokenExpirationException;
-import com.project.watcha.global.exception.exceptions.UsedEmailException;
-import com.project.watcha.global.exception.exceptions.UserNotFoundException;
+import com.project.watcha.global.exception.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +41,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RefreshTokenExpirationException.class)
     public ResponseEntity<ErrorResponse> refreshTokenIsExpiredException(HttpServletRequest request, RefreshTokenExpirationException e) {
+        printException(request, e.getErrorCode());
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(ActorNotFoundException.class)
+    public ResponseEntity<ErrorResponse> actorNotFoundException(HttpServletRequest request, ActorNotFoundException e) {
         printException(request, e.getErrorCode());
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
