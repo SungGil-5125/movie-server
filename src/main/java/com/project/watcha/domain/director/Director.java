@@ -1,4 +1,4 @@
-package com.project.watcha.domain.movie;
+package com.project.watcha.domain.director;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,15 +10,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Actor {
+public class Director {
 
     @Id
     @GeneratedValue
-    private Long actor_id;
+    private Long director_id;
 
     @Column
     private String name;
 
     @Column
     private String url;
+
 }
