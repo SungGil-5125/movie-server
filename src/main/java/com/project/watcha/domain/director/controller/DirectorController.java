@@ -1,7 +1,7 @@
-package com.project.watcha.domain.actor.controller;
+package com.project.watcha.domain.director.controller;
 
-import com.project.watcha.domain.actor.dto.request.RegisterActorDto;
-import com.project.watcha.domain.actor.service.ActorService;
+import com.project.watcha.domain.director.dto.request.RegisterDirectorDto;
+import com.project.watcha.domain.director.service.DirectorService;
 import com.project.watcha.global.response.ResponseService;
 import com.project.watcha.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +13,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-public class ActorController {
+public class DirectorController {
 
-    private final ActorService actorService;
+    private final DirectorService directorService;
     private final ResponseService responseService;
 
-    @PostMapping("register/actor")
-    public CommonResultResponse registerActor(
-            @RequestPart(value = "actorDto") RegisterActorDto registerActorDto,
+    @PostMapping("register/director")
+    public CommonResultResponse registerDirector(
+            @RequestPart(value = "directorDto") RegisterDirectorDto registerDirectorDto,
             @RequestParam(required = false, value = "image") MultipartFile file) {
-        actorService.registerActor(registerActorDto, file);
+        directorService.registerDirector(registerDirectorDto, file);
         return responseService.getSuccessResult();
     }
 }

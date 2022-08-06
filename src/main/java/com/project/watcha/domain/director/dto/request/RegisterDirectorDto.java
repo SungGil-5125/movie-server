@@ -1,6 +1,6 @@
-package com.project.watcha.domain.actor.dto.request;
+package com.project.watcha.domain.director.dto.request;
 
-import com.project.watcha.domain.actor.Actor;
+import com.project.watcha.domain.director.Director;
 import com.project.watcha.domain.movie.enumType.Cast;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,16 +11,15 @@ import java.util.Collections;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterActorDto {
+public class RegisterDirectorDto {
 
     private String name;
 
-    public Actor toEntity(String url){
-        return Actor.builder()
+    public Director toEntity(String url) {
+        return Director.builder()
                 .name(name)
-                .cast(Collections.singletonList(Cast.ACTOR))
+                .cast(Collections.singletonList(Cast.DIRECTOR))
                 .url(url)
                 .build();
     }
-
 }
