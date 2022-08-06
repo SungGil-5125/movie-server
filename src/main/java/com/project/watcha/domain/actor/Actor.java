@@ -1,5 +1,6 @@
 package com.project.watcha.domain.actor;
 
+import com.project.watcha.domain.movie.Movie;
 import com.project.watcha.domain.movie.enumType.Cast;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,10 @@ public class Actor {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "casts", joinColumns = @JoinColumn(name = "actor_id"))
     private List<Cast> cast;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
     @Column
     private String url;
