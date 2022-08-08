@@ -20,16 +20,14 @@ import static javax.persistence.EnumType.STRING;
 public class Director {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long director_id;
 
     @Column
     private String name;
 
     @Enumerated(STRING) @Column(name = "cast")
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "casts", joinColumns = @JoinColumn(name = "actor_id"))
-    private List<Cast> cast;
+    private Cast cast;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
