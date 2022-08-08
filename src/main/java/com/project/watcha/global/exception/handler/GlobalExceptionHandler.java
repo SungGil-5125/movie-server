@@ -53,6 +53,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
+    @ExceptionHandler(DirectorNotFoundException.class)
+    public ResponseEntity<ErrorResponse> directorNotFoundException(HttpServletRequest request, DirectorNotFoundException e) {
+        printException(request, e.getErrorCode());
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> processValidationException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();

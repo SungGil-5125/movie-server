@@ -18,7 +18,10 @@ public enum ErrorCode {
     REFRESH_TOKEN_EXPIRATION(403, "만료 된 refreshToken 입니다."),
 
     /* ACTOR */
-    ACTOR_NOT_FOUND(404, "등록되지 않은 배우가 있습니다.")
+    ACTOR_NOT_FOUND(404, "등록되지 않은 배우가 있습니다."),
+
+    /* DIRECTOR */
+    DIRECTOR_NOT_FOUND(404, "등록되지 않은 감독이 있습니다.")
     ;
 
     private int status;
