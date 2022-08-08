@@ -1,40 +1,40 @@
 package com.project.watcha.domain.movie.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.project.watcha.domain.movie.Actor;
-import com.project.watcha.domain.movie.Director;
+import com.project.watcha.domain.actor.Actor;
+import com.project.watcha.domain.director.Director;
 import com.project.watcha.domain.movie.Movie;
 import com.project.watcha.domain.movie.enumType.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UploadMovieDto {
 
-    private List<String> director_name;
-    private List<String> actor_name;
+    private List<String> directorName;
+    private List<String> actorName;
     private String title;
     private String content;
+    private int spector;
     private int year;
     private Genre genre;
 
-    public Movie toEntity(Director director, Actor actor, String url) {
+    public Movie toEntity(List<Director> directors, List<Actor> actors, String image, String movie) {
         return Movie.builder()
-                .director(director)
-                .actor(actor)
+                .directors(directors)
+                .actors(actors)
                 .title(title)
                 .content(content)
+                .spectator(spector)
                 .year(year)
-                .genre(Collections.singletonList(genre))
-                .url(url)
+                .genre(Set.of(genre))
+                .image_url(image)
+                .movie_url(movie)
                 .build();
     }
 }
