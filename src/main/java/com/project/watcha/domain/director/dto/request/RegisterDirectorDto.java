@@ -18,7 +18,7 @@ public class RegisterDirectorDto {
     public Director toEntity(String url) {
         return Director.builder()
                 .name(name)
-                .cast(Collections.singletonList(Cast.DIRECTOR))
+                .cast(Cast.DIRECTOR)
                 .url(url)
                 .build();
     }

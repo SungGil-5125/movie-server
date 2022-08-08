@@ -18,7 +18,7 @@ public class RegisterActorDto {
     public Actor toEntity(String url){
         return Actor.builder()
                 .name(name)
-                .cast(Collections.singletonList(Cast.ACTOR))
+                .cast(Cast.ACTOR)
                 .url(url)
                 .build();
     }
