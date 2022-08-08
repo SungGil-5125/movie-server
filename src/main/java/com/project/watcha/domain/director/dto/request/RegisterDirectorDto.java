@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +17,7 @@ public class RegisterDirectorDto {
         return Director.builder()
                 .name(name)
                 .cast(Cast.DIRECTOR)
-                .url(url)
+                .url("https://watcha-s3-bucket.s3.ap-northeast-2.amazonaws.com/director_image/" + url)
                 .build();
     }
 }

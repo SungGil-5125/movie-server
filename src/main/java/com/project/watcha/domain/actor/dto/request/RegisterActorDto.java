@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +17,7 @@ public class RegisterActorDto {
         return Actor.builder()
                 .name(name)
                 .cast(Cast.ACTOR)
-                .url(url)
+                .url("https://watcha-s3-bucket.s3.ap-northeast-2.amazonaws.com/actor_image/"+ url)
                 .build();
     }
 

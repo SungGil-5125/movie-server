@@ -33,8 +33,8 @@ public class UploadMovieDto {
                 .spectator(spector)
                 .year(year)
                 .genre(Set.of(genre))
-                .image_url(image)
-                .movie_url(movie)
+                .image_url("https://watcha-s3-bucket.s3.ap-northeast-2.amazonaws.com/movie_image/" + image)
+                .movie_url("https://watcha-s3-bucket.s3.ap-northeast-2.amazonaws.com/movie/" + movie)
                 .build();
     }
 }
