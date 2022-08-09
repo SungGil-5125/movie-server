@@ -1,4 +1,4 @@
-package com.project.watcha.domain.movie.controller;
+package com.project.watcha.domain.movie.controller.admin;
 
 import com.project.watcha.domain.movie.dto.request.UploadMovieDto;
 import com.project.watcha.domain.movie.service.MovieService;
@@ -10,7 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-public class MovieController {
+@RequestMapping("v1/admin")
+public class AdminMovieController {
 
     private final MovieService movieService;
     private final ResponseService responseService;
@@ -23,4 +24,5 @@ public class MovieController {
         movieService.uploadMovie(uploadMovieDto, imageFile, movieFile);
         return responseService.getSuccessResult();
     }
+
 }

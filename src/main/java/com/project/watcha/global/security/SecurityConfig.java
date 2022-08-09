@@ -13,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.POST;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -32,8 +30,14 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(POST, "/signup").permitAll()
-                .antMatchers(POST, "/signin").permitAll()
+                .antMatchers( "/v1/signup").permitAll()
+                .antMatchers( "/v1/signin").permitAll()
+                .antMatchers("/v1/refreshToken").permitAll()
+
+                // 권한별 url 접근
+                .antMatchers("/v1/admin/**").hasRole("ADMIN")
+                .antMatchers("/v1/user/**").hasRole("USER")
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)

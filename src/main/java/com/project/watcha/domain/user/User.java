@@ -1,5 +1,8 @@
 package com.project.watcha.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.watcha.domain.sign.enumType.Role;
+import com.project.watcha.domain.user.enumType.Voucher;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +11,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
+import static javax.persistence.EnumType.STRING;
 
 @Entity
 @Getter
@@ -30,16 +37,21 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @Column
+    @Column @Enumerated(STRING)
+    private Voucher voucher;
+
+    @JsonIgnore
     private String refreshToken;
 
-    public void updateRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
+    @Column(name = "Role")
+    @Enumerated(STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "Role", joinColumns = @JoinColumn(name = "user_id"))
+    private List<Role> role = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return role;
     }
 
     @Override
@@ -65,5 +77,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public void updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
     }
 }

@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
+@RequestMapping("v1")
 public class SignController {
 
     private final SignService signService;
@@ -30,10 +30,5 @@ public class SignController {
     public CommonResultResponse signin(@Valid @RequestBody SignInDto signInDto) {
         SignInResponseDto data = signService.login(signInDto);
         return responseService.getSingleResult(data);
-    }
-
-    @GetMapping("/test")
-    public String a() {
-        return "test";
     }
 }

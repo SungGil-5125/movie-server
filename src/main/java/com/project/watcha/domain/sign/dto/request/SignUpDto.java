@@ -1,5 +1,6 @@
 package com.project.watcha.domain.sign.dto.request;
 
+import com.project.watcha.domain.sign.enumType.Role;
 import com.project.watcha.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Collections;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +36,7 @@ public class SignUpDto {
                 .userName(userName)
                 .email(email)
                 .password(password)
+                .role(Collections.singletonList(Role.ROLE_USER))
                 .build();
     }
 }
