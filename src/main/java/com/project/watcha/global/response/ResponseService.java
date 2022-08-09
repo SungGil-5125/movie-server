@@ -23,7 +23,7 @@ public class ResponseService {
         return getCommonResultResponse();
     }
 
-    public <T>SingleResult<T> getSingleResult(T data) {
+    public <T> SingleResult<T> getSingleResult(T data) {
         return new SingleResult<T>(getCommonResultResponse(), data);
     }
 

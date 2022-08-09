@@ -70,7 +70,7 @@ public class JwtTokenProvider {
 
     private String doGenerateToken(String email, TokenType tokenType, Long expiredTime) {
         Claims claims = Jwts.claims().setSubject(email);
-        claims.put("tokenType", tokenType);
+        claims.put("tokenType", tokenType.value);
 
         return Jwts.builder()
                 .setClaims(claims)

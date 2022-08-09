@@ -1,5 +1,8 @@
 package com.project.watcha.global.response.result;
 
+import lombok.Getter;
+
+@Getter
 public class SingleResult<T> extends CommonResultResponse {
 
     private T data;

@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class SignServiceImpl implements SignService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Transactional
     @Override
     public Long register(SignUpDto signUpDto) {
         Optional<User> findByEmail = userRepository.findByEmail(signUpDto.getEmail());
@@ -38,6 +40,7 @@ public class SignServiceImpl implements SignService {
         return userRepository.save(user).getUser_id();
     }
 
+    @Transactional
     @Override
     public SignInResponseDto login(SignInDto signInDto) {
         User user = userRepository.findByEmail(signInDto.getEmail())
@@ -57,6 +60,4 @@ public class SignServiceImpl implements SignService {
                 .refreshToken(refreshToken)
                 .build();
     }
-
-
 }
