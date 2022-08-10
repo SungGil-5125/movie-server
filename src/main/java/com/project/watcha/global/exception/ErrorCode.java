@@ -21,7 +21,10 @@ public enum ErrorCode {
     ACTOR_NOT_FOUND(404, "등록되지 않은 배우가 있습니다."),
 
     /* DIRECTOR */
-    DIRECTOR_NOT_FOUND(404, "등록되지 않은 감독이 있습니다.")
+    DIRECTOR_NOT_FOUND(404, "등록되지 않은 감독이 있습니다."),
+
+    /*  MOVIE */
+    MOVIE_NOT_FOUND(404, "영화를 찾을 수 없습니다.")
     ;
 
     private int status;

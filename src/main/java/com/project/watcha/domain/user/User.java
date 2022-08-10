@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private Long user_id;
 
     @Column
-    private String userName;
+    private String username;
 
     @Column
     private String email;
@@ -56,7 +56,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
