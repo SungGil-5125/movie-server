@@ -26,8 +26,6 @@ public class AdminMovieController {
         return responseService.getSuccessResult();
     }
 
-    @PostMapping("")
-
     @GetMapping("contents/{movie_id}")
     public CommonResultResponse contentMovie(@PathVariable Long movie_id) {
         MovieResponseDto data = movieService.contentMovie(movie_id);

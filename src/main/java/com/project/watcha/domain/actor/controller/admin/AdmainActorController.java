@@ -1,19 +1,17 @@
-package com.project.watcha.domain.actor.controller;
+package com.project.watcha.domain.actor.controller.admin;
 
 import com.project.watcha.domain.actor.dto.request.RegisterActorDto;
 import com.project.watcha.domain.actor.service.ActorService;
 import com.project.watcha.global.response.ResponseService;
 import com.project.watcha.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-public class ActorController {
+@RequestMapping("v1/admin/")
+public class AdmainActorController {
 
     private final ActorService actorService;
     private final ResponseService responseService;
