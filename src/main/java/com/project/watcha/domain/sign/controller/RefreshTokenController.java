@@ -16,14 +16,14 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("v1")
+@RequestMapping("v1/")
 public class RefreshTokenController {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final ResponseService responseService;
     private final RefreshTokenService refreshTokenService;
 
-    @PutMapping("/refreshToken")
+    @PutMapping("refreshToken")
     public SingleResult<Map<String, String>> refreshToken(HttpServletRequest request, @RequestBody RefreshTokenDto refreshTokenDto) {
         Map<String, String> data = refreshTokenService.refreshToken(jwtTokenProvider.getRefreshToken(request), refreshTokenDto);
         return responseService.getSingleResult(data);
