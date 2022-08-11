@@ -6,11 +6,13 @@ import com.project.watcha.domain.director.Director;
 import com.project.watcha.domain.director.repository.DirectorRepository;
 import com.project.watcha.domain.movie.Movie;
 import com.project.watcha.domain.movie.dto.request.UploadMovieDto;
+import com.project.watcha.domain.movie.dto.response.MovieResponseDto;
 import com.project.watcha.domain.movie.repository.MovieRepository;
 import com.project.watcha.domain.movie.service.MovieService;
 import com.project.watcha.domain.movie.service.S3Service;
 import com.project.watcha.global.exception.exceptions.ActorNotFoundException;
 import com.project.watcha.global.exception.exceptions.DirectorNotFoundException;
+import com.project.watcha.global.exception.exceptions.MovieNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.project.watcha.global.exception.ErrorCode.ACTOR_NOT_FOUND;
-import static com.project.watcha.global.exception.ErrorCode.DIRECTOR_NOT_FOUND;
+import static com.project.watcha.global.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
 
     @Override
-    public Long uploadMovie(UploadMovieDto uploadMovieDto, MultipartFile imageFile, MultipartFile movieFile) {
+    public void uploadMovie(UploadMovieDto uploadMovieDto, MultipartFile imageFile, MultipartFile movieFile) {
 
         List<String> directorName = uploadMovieDto.getDirectorName();
         List<Director> directors = new ArrayList<>();
@@ -56,10 +57,37 @@ public class MovieServiceImpl implements MovieService {
             actors.add(actor);
         });
 
+        System.out.println("uploadMovieDto = " + uploadMovieDto.getGenre());
+
         String imageUrl = s3Service.upload(imageFile, "movie_image/");
         String movieUrl = s3Service.upload(movieFile, "movie/");
 
         Movie movie = uploadMovieDto.toEntity(directors, actors, imageUrl, movieUrl);
-        return movieRepository.save(movie).getMovie_id();
+        movieRepository.save(movie);
     }
+
+    @Override
+    public MovieResponseDto contentMovie(Long movie_id) {
+        Movie movie = movieRepository.findById(movie_id)
+                .orElseThrow(() -> new MovieNotFoundException(MOVIE_NOT_FOUND));
+
+        MovieResponseDto movieResponseDto = MovieResponseDto.builder()
+                .title(movie.getTitle())
+                .content(movie.getContent())
+                .spector(movie.getSpectator())
+                .genre(movie.getGenre())
+                .image_url(movie.getImage_url())
+                .build();
+        return movieResponseDto;
+    }
+
+    @Override
+    public String watchMovie(Long movie_id) {
+        Movie movie = movieRepository.findById(movie_id)
+                .orElseThrow(() -> new MovieNotFoundException(MOVIE_NOT_FOUND));
+
+        return movie.getMovie_url();
+    }
+
+
 }
