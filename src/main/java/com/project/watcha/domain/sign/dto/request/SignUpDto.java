@@ -20,7 +20,7 @@ public class SignUpDto {
 
     @NotBlank
     @Size(min = 2, max = 5)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?", message = "이메일 형식이 아닙니다")
@@ -33,7 +33,7 @@ public class SignUpDto {
 
     public User toEntity(String password) {
         return User.builder()
-                .userName(userName)
+                .username(username)
                 .email(email)
                 .password(password)
                 .role(Collections.singletonList(Role.ROLE_USER))
