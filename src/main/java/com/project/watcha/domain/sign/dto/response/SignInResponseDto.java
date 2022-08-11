@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.Map;
+
 @Getter
 @AllArgsConstructor
 @Builder
 public class SignInResponseDto {
 
-    private String accessToken;
-    private String refreshToken;
+    private Map<String, String> token;
 }

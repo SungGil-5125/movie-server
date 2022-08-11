@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.project.watcha.global.exception.ErrorCode.*;
@@ -29,6 +31,11 @@ public class SignServiceImpl implements SignService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
+    /**
+    회원가입 로직
+     @Requestbody : userName, email, password
+     @return : user_id
+     **/
     @Transactional
     @Override
     public Long register(SignUpDto signUpDto) {
@@ -40,24 +47,34 @@ public class SignServiceImpl implements SignService {
         return userRepository.save(user).getUser_id();
     }
 
+    /**
+    로그인 로직
+     @Requestbody : email, password
+     @return : token - accessToken, refreshToken
+     **/
     @Transactional
     @Override
     public SignInResponseDto login(SignInDto signInDto) {
         User user = userRepository.findByEmail(signInDto.getEmail())
                  .orElseThrow(() -> new UserNotFoundException("사용자를 찾을 수 없습니다.", USER_NOT_FOUND));
-
         if(!passwordEncoder.matches(signInDto.getPassword(), user.getPassword())) {
              throw new PasswordNotCorrectException(PASSWORD_NOT_CORRECT);
         }
+        return new SignInResponseDto(createToken(user));
+    }
 
+    /**
+    토큰 생성 로직
+     @Param : user
+     @return : token - accessToken, refreshToken
+     **/
+    private Map<String, String> createToken(User user) {
+        Map<String, String> token = new HashMap<>();
         final String accessToken = jwtTokenProvider.generateAccessToken(user.getEmail());
         final String refreshToken = jwtTokenProvider.generateRefreshToken(user.getEmail());
-
         user.updateRefreshToken(refreshToken);
-
-        return SignInResponseDto.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build();
+        token.put("accessToken", accessToken);
+        token.put("refreshToken", refreshToken);
+        return token;
     }
 }
