@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @AllArgsConstructor
@@ -20,9 +19,10 @@ public class UploadMovieDto {
     private List<String> actorName;
     private String title;
     private String content;
+    private int time;
     private int spector;
-    private int year;
-    private Genre genre;
+    private int opening_date;
+    private List<Genre> genre;
 
     public Movie toEntity(List<Director> directors, List<Actor> actors, String image, String movie) {
         return Movie.builder()
@@ -30,9 +30,10 @@ public class UploadMovieDto {
                 .actors(actors)
                 .title(title)
                 .content(content)
+                .time(time)
                 .spectator(spector)
-                .year(year)
-                .genre(Set.of(genre))
+                .opening_date(opening_date)
+                .genre(genre)
                 .image_url("https://watcha-s3-bucket.s3.ap-northeast-2.amazonaws.com/movie_image/" + image)
                 .movie_url("https://watcha-s3-bucket.s3.ap-northeast-2.amazonaws.com/movie/" + movie)
                 .build();

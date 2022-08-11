@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -44,12 +42,16 @@ public class Movie {
     private int spectator; // 관람가 등급
 
     @Column
-    private int year;
+    private int opening_date;
 
-    @Enumerated(STRING) @Column(name = "genre")
+    @Enumerated(STRING)
+    @Column(name = "genre")
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "genre", joinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Genre> genre = new HashSet<>();
+    private List<Genre> genre = new ArrayList<>();
+
+    @Column
+    private int time;
 
     @Column
     private String image_url;
