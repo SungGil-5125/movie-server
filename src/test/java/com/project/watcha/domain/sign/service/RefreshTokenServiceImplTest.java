@@ -29,7 +29,7 @@ class RefreshTokenServiceImplTest {
         signService.login(signInDto);
 
         // when
-        
+
 
         // then
     }
