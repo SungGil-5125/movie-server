@@ -16,6 +16,7 @@ import com.project.watcha.global.exception.exceptions.MovieNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class MovieServiceImpl implements MovieService {
     private final ActorRepository actorRepository;
     private final MovieRepository movieRepository;
 
+    @Transactional
     @Override
     public void uploadMovie(UploadMovieDto uploadMovieDto, MultipartFile imageFile, MultipartFile movieFile) {
 
@@ -66,6 +68,7 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.save(movie);
     }
 
+    @Transactional
     @Override
     public MovieResponseDto contentMovie(Long movie_id) {
         Movie movie = movieRepository.findById(movie_id)
@@ -81,6 +84,7 @@ public class MovieServiceImpl implements MovieService {
         return movieResponseDto;
     }
 
+    @Transactional
     @Override
     public String watchMovie(Long movie_id) {
         Movie movie = movieRepository.findById(movie_id)

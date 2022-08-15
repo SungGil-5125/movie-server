@@ -8,6 +8,7 @@ import com.project.watcha.domain.movie.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -18,6 +19,7 @@ public class DirectorServiceImpl implements DirectorService {
     private final S3Service s3Service;
     private final DirectorRepository directorRepository;
 
+    @Transactional
     @Override
     public Long registerDirector(RegisterDirectorDto registerDirectorDto, MultipartFile file) {
         String url = s3Service.upload(file, "director_image/");

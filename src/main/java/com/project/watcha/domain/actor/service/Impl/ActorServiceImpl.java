@@ -7,6 +7,7 @@ import com.project.watcha.domain.actor.service.ActorService;
 import com.project.watcha.domain.movie.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -16,6 +17,7 @@ public class ActorServiceImpl implements ActorService {
     private final S3Service s3Service;
     private final ActorRepository actorRepository;
 
+    @Transactional
     @Override
     public Long registerActor(RegisterActorDto registerActorDto, MultipartFile file) {
         String url = s3Service.upload(file, "actor_image/");
