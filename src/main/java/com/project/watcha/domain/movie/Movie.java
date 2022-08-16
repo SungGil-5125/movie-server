@@ -1,7 +1,5 @@
 package com.project.watcha.domain.movie;
 
-import com.project.watcha.domain.actor.Actor;
-import com.project.watcha.domain.director.Director;
 import com.project.watcha.domain.movie.enumType.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,11 +24,9 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movie_id;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<Director> directors = new ArrayList<>();
-
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<Actor> actors = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "moviePeople")
+    private MoviePeople moviePeople;
 
     @Column
     private String title;
