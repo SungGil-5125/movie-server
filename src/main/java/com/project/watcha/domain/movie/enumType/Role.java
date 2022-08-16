@@ -4,6 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum Role {
-
-    DIRECTOR, MAIN_ACTOR, SUPPORTING;
+    DIRECTOR, MAIN_ACTOR, SUPPORTING_ACTOR;
 }
