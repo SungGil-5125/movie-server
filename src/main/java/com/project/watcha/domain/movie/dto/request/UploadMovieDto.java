@@ -1,5 +1,7 @@
 package com.project.watcha.domain.movie.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.watcha.domain.movie.Movie;
 import com.project.watcha.domain.movie.MoviePeople;
 import com.project.watcha.domain.movie.enumType.Genre;
@@ -17,6 +19,7 @@ public class UploadMovieDto {
 
     private String title;
     private String content;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private ArrayList<ArrayList<MoviePeopleDto>> moviePeople;
     private int time;
     private int spector;
