@@ -46,15 +46,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
-    @ExceptionHandler(ActorNotFoundException.class)
-    public ResponseEntity<ErrorResponse> actorNotFoundException(HttpServletRequest request, ActorNotFoundException e) {
+    @ExceptionHandler(PeopleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> actorNotFoundException(HttpServletRequest request, PeopleNotFoundException e) {
         printException(request, e.getErrorCode());
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
-    @ExceptionHandler(DirectorNotFoundException.class)
-    public ResponseEntity<ErrorResponse> directorNotFoundException(HttpServletRequest request, DirectorNotFoundException e) {
+    @ExceptionHandler(PeopleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> directorNotFoundException(HttpServletRequest request, PeopleNotFoundException e) {
         printException(request, e.getErrorCode());
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));

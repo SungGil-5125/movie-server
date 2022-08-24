@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UsedEmailException extends RuntimeException {
+public class PeopleNotFoundException extends RuntimeException {
 
     private ErrorCode errorCode;
 
