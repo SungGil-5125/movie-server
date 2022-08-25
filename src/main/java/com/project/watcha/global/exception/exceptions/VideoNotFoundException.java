@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MovieNotFoundException extends RuntimeException {
+public class VideoNotFoundException extends RuntimeException {
 
     private ErrorCode errorCode;
 

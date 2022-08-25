@@ -53,8 +53,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
-    @ExceptionHandler(MovieNotFoundException.class)
-    public ResponseEntity<ErrorResponse> movieNotFoundException(HttpServletRequest request, MovieNotFoundException e) {
+    @ExceptionHandler(VideoNotFoundException.class)
+    public ResponseEntity<ErrorResponse> movieNotFoundException(HttpServletRequest request, VideoNotFoundException e) {
         printException(request, e.getErrorCode());
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
