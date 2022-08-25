@@ -1,5 +1,6 @@
 package com.project.watcha.domain.movie.controller.admin;
 
+import com.project.watcha.domain.people.dto.RegisterPeopleDto;
 import com.project.watcha.domain.movie.dto.request.UploadMovieDto;
 import com.project.watcha.domain.movie.dto.response.MovieResponseDto;
 import com.project.watcha.domain.movie.service.MovieService;
@@ -20,22 +21,22 @@ public class AdminMovieController {
     @PostMapping("upload/movie")
     public CommonResultResponse uploadMovie(
             @RequestPart(value = "movieDto") UploadMovieDto uploadMovieDto,
-            @RequestParam(value = "image", required = false) MultipartFile imageFile,
-            @RequestParam(value = "movie", required = false) MultipartFile movieFile) {
+            @RequestPart(value = "image", required = false) MultipartFile imageFile,
+            @RequestPart(value = "movie", required = false) MultipartFile movieFile) {
         movieService.uploadMovie(uploadMovieDto, imageFile, movieFile);
         return responseService.getSuccessResult();
     }
 
     @GetMapping("contents/{movie_id}")
     public CommonResultResponse contentMovie(@PathVariable Long movie_id) {
-        MovieResponseDto data = movieService.contentMovie(movie_id);
-        return responseService.getSingleResult(data);
+        MovieResponseDto result = movieService.contentMovie(movie_id);
+        return responseService.getSingleResult(result);
     }
 
     @GetMapping("watch/{movie_id}")
     public CommonResultResponse watchMovie(@PathVariable Long movie_id) {
-        String data = movieService.watchMovie(movie_id);
-        return responseService.getSingleResult(data);
+        String result = movieService.watchMovie(movie_id);
+        return responseService.getSingleResult(result);
     }
 
 }

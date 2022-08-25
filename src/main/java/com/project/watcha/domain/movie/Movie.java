@@ -54,4 +54,8 @@ public class Movie {
 
     @Column
     private String movie_url;
+
+    public void updateMoviePeople(MoviePeople moviePeople) {
+        this.moviePeople = moviePeople;
+    }
 }

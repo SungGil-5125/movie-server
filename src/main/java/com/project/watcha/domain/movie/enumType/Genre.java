@@ -1,11 +1,13 @@
 package com.project.watcha.domain.movie.enumType;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.stream.Stream;
 
 @Getter
+@AllArgsConstructor
 public enum Genre {
     SF("sf"),
     ACTION("action"),
@@ -15,10 +17,6 @@ public enum Genre {
     HORROR("horror");
 
     private final String code;
-
-    Genre(String code) {
-        this.code = code;
-    }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static Genre findByCode(String code) {
