@@ -17,11 +17,8 @@ public enum ErrorCode {
     TOKEN_EXPIRATION(403, "만료된 Token 입니다."),
     REFRESH_TOKEN_EXPIRATION(403, "만료 된 refreshToken 입니다."),
 
-    /* ACTOR */
-    ACTOR_NOT_FOUND(404, "등록되지 않은 배우가 있습니다."),
-
-    /* DIRECTOR */
-    DIRECTOR_NOT_FOUND(404, "등록되지 않은 감독이 있습니다."),
+    /* PEOPLE */
+    PEOPLE_NOT_FOUND(404, "등록되지 않은 배우나 감독이 있습니다."),
 
     /*  MOVIE */
     MOVIE_NOT_FOUND(404, "영화를 찾을 수 없습니다.")
