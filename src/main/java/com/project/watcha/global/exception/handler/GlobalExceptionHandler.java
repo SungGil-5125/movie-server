@@ -47,13 +47,6 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PeopleNotFoundException.class)
-    public ResponseEntity<ErrorResponse> actorNotFoundException(HttpServletRequest request, PeopleNotFoundException e) {
-        printException(request, e.getErrorCode());
-        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
-        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
-    }
-
-    @ExceptionHandler(PeopleNotFoundException.class)
     public ResponseEntity<ErrorResponse> directorNotFoundException(HttpServletRequest request, PeopleNotFoundException e) {
         printException(request, e.getErrorCode());
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
