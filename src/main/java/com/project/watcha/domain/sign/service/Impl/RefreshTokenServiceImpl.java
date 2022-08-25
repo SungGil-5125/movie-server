@@ -9,6 +9,7 @@ import com.project.watcha.global.exception.exceptions.RefreshTokenExpirationExce
 import com.project.watcha.global.exception.exceptions.UserNotFoundException;
 import com.project.watcha.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import static com.project.watcha.global.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -26,13 +28,11 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     public Map<String, String> refreshToken(String refreshToken, RefreshTokenDto refreshTokenDto) {
 
-        String email = refreshTokenDto.getEmail();
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("계정을 찾을 수 없습니다.", USER_NOT_FOUND));
+        User user = userRepository.findByEmail(refreshTokenDto.getEmail())
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
 
         Map<String, String> token = new HashMap<>();
-
-        if(!jwtTokenProvider.isExpired(refreshToken) && user.getRefreshToken() == refreshToken) {
+        if(!jwtTokenProvider.isExpired(refreshToken) && user.getRefreshToken().equals(refreshToken)) {
 
             if (user.getRefreshToken() == null) {
                 throw new InvalidTokenException(INVALID_TOKEN);
@@ -44,6 +44,6 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
             return token;
         }
 
-        throw new RefreshTokenExpirationException("만료 된 refreshToken 입니다.", REFRESH_TOKEN_EXPIRATION);
+        throw new RefreshTokenExpirationException(REFRESH_TOKEN_EXPIRATION);
     }
 }

@@ -25,6 +25,6 @@ public class CurrentUserUtil {
             email = principal.toString();
         }
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("계정을 찾을 수 없습니다.", USER_NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
 }

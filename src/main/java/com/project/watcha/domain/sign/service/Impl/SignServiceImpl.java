@@ -41,7 +41,7 @@ public class SignServiceImpl implements SignService {
     public Long register(SignUpDto signUpDto) {
         Optional<User> findByEmail = userRepository.findByEmail(signUpDto.getEmail());
         if(findByEmail.isPresent()){
-            throw new UsedEmailException("이미 사용 중인 이메일 입니다.", USED_EMAIL);
+            throw new UsedEmailException(USED_EMAIL);
         }
         User user = signUpDto.toEntity(passwordEncoder.encode(signUpDto.getPassword()));
         return userRepository.save(user).getUser_id();
@@ -56,7 +56,7 @@ public class SignServiceImpl implements SignService {
     @Override
     public SignInResponseDto login(SignInDto signInDto) {
         User user = userRepository.findByEmail(signInDto.getEmail())
-                 .orElseThrow(() -> new UserNotFoundException("사용자를 찾을 수 없습니다.", USER_NOT_FOUND));
+                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         if(!passwordEncoder.matches(signInDto.getPassword(), user.getPassword())) {
              throw new PasswordNotCorrectException(PASSWORD_NOT_CORRECT);
         }
