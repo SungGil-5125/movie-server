@@ -29,4 +29,5 @@ public class MoviePeople {
     @OneToOne
     @JoinColumn(name = "people")
     private People people;
+
 }

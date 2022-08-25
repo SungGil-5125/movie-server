@@ -1,7 +1,8 @@
 package com.project.watcha.domain.people;
 
-import com.project.watcha.domain.movie.enumType.Role;
+import com.project.watcha.domain.people.enumType.Cast;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import static javax.persistence.EnumType.STRING;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class People {
 
     @Id
@@ -23,5 +25,8 @@ public class People {
     private String name;
 
     @Column @Enumerated(STRING)
-    private Role role;
+    private Cast cast;
+
+    @Column
+    private String image_url;
 }
