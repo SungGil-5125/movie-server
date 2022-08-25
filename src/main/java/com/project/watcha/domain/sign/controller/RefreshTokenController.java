@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
@@ -24,7 +25,7 @@ public class RefreshTokenController {
     private final RefreshTokenService refreshTokenService;
 
     @PutMapping("refreshToken")
-    public SingleResult<Map<String, String>> refreshToken(HttpServletRequest request, @RequestBody RefreshTokenDto refreshTokenDto) {
+    public SingleResult<Map<String, String>> refreshToken(HttpServletRequest request, @Valid @RequestBody RefreshTokenDto refreshTokenDto) {
         Map<String, String> data = refreshTokenService.refreshToken(jwtTokenProvider.getRefreshToken(request), refreshTokenDto);
         return responseService.getSingleResult(data);
     }
