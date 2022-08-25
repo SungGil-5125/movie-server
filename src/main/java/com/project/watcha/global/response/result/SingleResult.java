@@ -5,11 +5,10 @@ import lombok.Getter;
 @Getter
 public class SingleResult<T> extends CommonResultResponse {
 
-    private T data;
+    private T result;
 
-    public SingleResult(CommonResultResponse commonResultResponse, T data) {
+    public SingleResult(CommonResultResponse commonResultResponse, T result) {
         super(commonResultResponse.isSuccess(), commonResultResponse.getMessage(), commonResultResponse.getStatus());
-        this.data = data;
+        this.result = result;
     }
-
 }

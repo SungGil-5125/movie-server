@@ -12,7 +12,7 @@ public class ResponseService {
     @Getter
     @AllArgsConstructor
     public enum CommonResponse{
-        SUCCESS(true, "아싸뵹", 200);
+        SUCCESS(true, "아싸뵹!", 200);
 
         private boolean success;
         private String message;
@@ -23,8 +23,8 @@ public class ResponseService {
         return getCommonResultResponse();
     }
 
-    public <T> SingleResult<T> getSingleResult(T data) {
-        return new SingleResult<T>(getCommonResultResponse(), data);
+    public <T> SingleResult<T> getSingleResult(T result) {
+        return new SingleResult<T>(getCommonResultResponse(), result);
     }
 
     private CommonResultResponse getCommonResultResponse() {
