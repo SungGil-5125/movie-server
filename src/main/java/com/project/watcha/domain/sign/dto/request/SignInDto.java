@@ -16,9 +16,9 @@ import javax.validation.constraints.Size;
 public class SignInDto {
 
     @Email
-    @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?")
+    @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?", message = "이메일 형식이 아닙니다")
     private String email;
 
-    @Size(min = 10)
+    @Size(min = 10, max = 20)
     private String password;
 }
