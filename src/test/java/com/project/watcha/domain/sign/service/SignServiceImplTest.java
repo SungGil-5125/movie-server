@@ -26,7 +26,7 @@ class SignServiceImplTest {
 
         // given
         SignUpDto signUpDto = SignUpDto.builder()
-                .userName("김성길")
+                .username("김성길")
                 .email("sunggil0125@naver.com")
                 .password("1234")
                 .build();
@@ -50,7 +50,6 @@ class SignServiceImplTest {
 
         // when
         SignInResponseDto login = signService.login(signInDto);
-        System.out.println("login = " + login.getRefreshToken());
 
         // then
         assertThat(login).isNotNull();
