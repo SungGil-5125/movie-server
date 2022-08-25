@@ -28,7 +28,7 @@ public class SignController {
 
     @PostMapping("signin")
     public CommonResultResponse signin(@Valid @RequestBody SignInDto signInDto) {
-        SignInResponseDto data = signService.login(signInDto);
-        return responseService.getSingleResult(data);
+        SignInResponseDto result = signService.login(signInDto);
+        return responseService.getSingleResult(result);
     }
 }
