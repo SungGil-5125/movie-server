@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @AllArgsConstructor
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 public class RefreshTokenDto {
 
     @Email
+    @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?", message = "이메일 형식이 아닙니다")
     @NotBlank
     private String email;
 }
