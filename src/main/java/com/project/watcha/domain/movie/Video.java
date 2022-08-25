@@ -18,7 +18,7 @@ import static javax.persistence.EnumType.STRING;
 @Getter
 @Builder
 @Table(name = "movie")
-public class Movie {
+public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,13 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "moviePeople")
-    private MoviePeople moviePeople;
+    private VideoPeople videoPeople;
 
     @Column
     private String title;
 
     @Column
-    private String content;
+    private String summary;
 
     @Column
     private int spectator; // 관람가 등급
@@ -55,7 +55,7 @@ public class Movie {
     @Column
     private String movie_url;
 
-    public void updateMoviePeople(MoviePeople moviePeople) {
-        this.moviePeople = moviePeople;
+    public void updateMoviePeople(VideoPeople videoPeople) {
+        this.videoPeople = videoPeople;
     }
 }

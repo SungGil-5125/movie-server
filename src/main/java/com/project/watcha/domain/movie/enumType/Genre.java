@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 @Getter
 @AllArgsConstructor
 public enum Genre {
+
     SF("sf"),
     ACTION("action"),
     COMEDY("comedy"),

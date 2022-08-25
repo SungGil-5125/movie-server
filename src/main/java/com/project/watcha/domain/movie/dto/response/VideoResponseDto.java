@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class MovieResponseDto {
+public class VideoResponseDto {
 
     private String title;
     private String content;

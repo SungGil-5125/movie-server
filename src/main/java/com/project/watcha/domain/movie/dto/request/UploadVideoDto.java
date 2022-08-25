@@ -1,7 +1,7 @@
 package com.project.watcha.domain.movie.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.project.watcha.domain.movie.Movie;
+import com.project.watcha.domain.movie.Video;
 import com.project.watcha.domain.movie.enumType.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,21 +12,21 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UploadMovieDto {
+public class UploadVideoDto {
 
     private String title;
-    private String content;
+    private String summary;
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<MoviePeopleDto> moviePeople;
+    private List<VideoPeopleDto> moviePeople;
     private int time;
     private int spector;
     private int opening_date;
     private List<Genre> genre;
 
-    public Movie toEntity(String image_url, String movie_url) {
-        return Movie.builder()
+    public Video toEntity(String image_url, String movie_url) {
+        return Video.builder()
                 .title(title)
-                .content(content)
+                .summary(summary)
                 .time(time)
                 .spectator(spector)
                 .opening_date(opening_date)

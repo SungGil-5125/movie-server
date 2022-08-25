@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MoviePeople {
+public class VideoPeople {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class MoviePeople {
 
     @OneToOne
     @JoinColumn(name = "movie_id")
-    private Movie movie;
+    private Video video;
 
     @Column
     private String character_name;
