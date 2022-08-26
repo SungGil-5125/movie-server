@@ -1,5 +1,8 @@
 package com.project.watcha.domain.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.watcha.domain.movie.enumType.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,16 +20,15 @@ import static javax.persistence.EnumType.STRING;
 @NoArgsConstructor
 @Getter
 @Builder
-@Table(name = "movie")
 public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movie_id;
 
-    @ManyToOne
-    @JoinColumn(name = "moviePeople")
-    private VideoPeople videoPeople;
+    @JsonProperty
+    @OneToMany(mappedBy = "video")
+    private List<VideoPeople> videoPeople = new ArrayList<>();
 
     @Column
     private String title;
@@ -55,7 +57,4 @@ public class Video {
     @Column
     private String movie_url;
 
-    public void updateMoviePeople(VideoPeople videoPeople) {
-        this.videoPeople = videoPeople;
-    }
 }

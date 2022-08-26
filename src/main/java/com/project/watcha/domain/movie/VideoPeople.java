@@ -1,5 +1,8 @@
 package com.project.watcha.domain.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.watcha.domain.people.People;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +22,8 @@ public class VideoPeople {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long moviePeople_id;
 
-    @OneToOne
+    @JsonIgnore // jackson이 json으로 변환하는걸 무시하게 만들어줌
+    @ManyToOne
     @JoinColumn(name = "movie_id")
     private Video video;
 
@@ -27,7 +31,7 @@ public class VideoPeople {
     private String character_name;
 
     @OneToOne
-    @JoinColumn(name = "people")
+    @JoinColumn(name = "people_id")
     private People people;
 
 }

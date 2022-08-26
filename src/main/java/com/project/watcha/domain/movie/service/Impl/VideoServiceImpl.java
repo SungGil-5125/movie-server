@@ -4,6 +4,7 @@ import com.project.watcha.domain.movie.Video;
 import com.project.watcha.domain.movie.VideoPeople;
 import com.project.watcha.domain.movie.dto.request.UploadVideoDto;
 import com.project.watcha.domain.movie.dto.request.VideoPeopleDto;
+import com.project.watcha.domain.movie.dto.response.AllVideoDto;
 import com.project.watcha.domain.movie.dto.response.VideoResponseDto;
 import com.project.watcha.domain.movie.repository.VideoPeopleRepository;
 import com.project.watcha.domain.movie.repository.VideoRepository;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.project.watcha.global.exception.ErrorCode.*;
@@ -67,17 +70,15 @@ public class VideoServiceImpl implements VideoService {
         List<VideoPeopleDto> moviePeoples = uploadVideoDto.getMoviePeople();
         moviePeoples.forEach(Peoples -> {
 
-            log.info(Peoples.getName());
-
             People people = peopleRepository.findByName(Peoples.getName())
                     .orElseThrow(() -> new PeopleNotFoundException(PEOPLE_NOT_FOUND));
 
-            VideoPeople videoPeople = VideoPeople.builder()
+            moviePeopleRepository.save(
+                    VideoPeople.builder()
                     .character_name(Peoples.getCractor_name())
                     .video(video)
                     .people(people)
-                    .build();
-            moviePeopleRepository.save(videoPeople);
+                    .build());
         });
 
     }
@@ -88,15 +89,14 @@ public class VideoServiceImpl implements VideoService {
         Video video = videoRepository.findById(movie_id)
                 .orElseThrow(() -> new VideoNotFoundException(VIDEO_NOT_FOUND));
 
-        VideoResponseDto videoResponseDto = VideoResponseDto.builder()
+        return VideoResponseDto.builder()
                 .title(video.getTitle())
-                .content(video.getSummary())
+                .summary(video.getSummary())
+                .videoPeople(video.getVideoPeople())
                 .spector(video.getSpectator())
                 .genre(video.getGenre())
                 .image_url(video.getImage_url())
                 .build();
-
-        return videoResponseDto;
     }
 
     @Transactional
@@ -106,5 +106,28 @@ public class VideoServiceImpl implements VideoService {
                 .orElseThrow(() -> new VideoNotFoundException(VIDEO_NOT_FOUND));
 
         return video.getMovie_url();
+    }
+
+    @Override
+    public List<AllVideoDto> browseVideo() {
+        List<Video> findAllVideo = videoRepository.findAll();
+        List<AllVideoDto> allVideoListDtoList = new ArrayList<>();
+
+        findAllVideo.forEach(Video -> {
+            allVideoListDtoList.add(
+                    AllVideoDto.builder()
+                    .movie_id(Video.getMovie_id())
+                    .title(Video.getTitle())
+                    .summary(Video.getSummary())
+                    .spector(Video.getSpectator())
+                    .opening_date(Video.getOpening_date())
+                    .genres(Video.getGenre())
+                    .time(Video.getTime())
+                    .image_url(Video.getImage_url())
+                    .build()
+            );
+        });
+
+        return allVideoListDtoList;
     }
 }
