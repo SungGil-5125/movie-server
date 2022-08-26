@@ -1,6 +1,7 @@
 package com.project.watcha.domain.movie.controller.admin;
 
 import com.project.watcha.domain.movie.dto.request.UploadVideoDto;
+import com.project.watcha.domain.movie.dto.response.AllVideoDto;
 import com.project.watcha.domain.movie.dto.response.VideoResponseDto;
 import com.project.watcha.domain.movie.service.VideoService;
 import com.project.watcha.global.response.ResponseService;
@@ -8,6 +9,8 @@ import com.project.watcha.global.response.result.CommonResultResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,5 +42,8 @@ public class AdminVideoController {
     }
 
     @GetMapping("browse/video")
-    public void browseVideo
+    public CommonResultResponse browseVideo() {
+        List<AllVideoDto> result = videoService.browseVideo();
+        return responseService.getSingleResult(result);
+    }
 }
