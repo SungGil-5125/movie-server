@@ -22,7 +22,7 @@ public class VideoPeople {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long moviePeople_id;
 
-    @JsonIgnore // jackson이 json으로 변환하는걸 무시하게 만들어줌
+    @JsonIgnore // jackson이 json으로 변환하는걸 무시하게 만들어줌 그래서 수환참조가 안일어남
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Video video;
